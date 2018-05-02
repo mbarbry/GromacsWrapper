@@ -45,9 +45,7 @@ install:
 
   # install test tools
   - pip install git+git://github.com/ianmkenney/pytest-gmx.git
-  - pip install codecov
-  - pip install pytest-cov
-  - pip install pytest-pep8
+  - pip install codecov pytest-cov pytest-xdist pytest-pep8
   - pip install -e .
 
   # source gromacs
@@ -55,7 +53,7 @@ install:
 
 # run tests
 script:
-  - py.test --cov gromacs gromacs/tests
+  - pytest --numprocesses 2 --durations=20 --low-performance --cov gromacs gromacs/tests
 
 after_success:
   - codecov
